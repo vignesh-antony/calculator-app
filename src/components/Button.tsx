@@ -6,12 +6,11 @@ type ButtonVaraintType = "filled" | "outlined";
 const StyledButton = styled.button<{ $variant: ButtonVaraintType }>`
     padding: 8px 16px;
     background-color: ${({ $variant }) =>
-        $variant === "filled" ? "#008a6c" : "#ffffff"};
-    border: 1px solid #008a6c;
+        $variant === "filled" ? "#676792" : "#ffffff"};
+    border: 1px solid #676792;
     border-radius: 8px;
     cursor: pointer;
-    color: ${({ $variant }) =>
-        $variant === "outlined" ? "#008a6c" : "#ffffff"};
+    color: ${({ $variant }) => ($variant === "filled" ? "#ffffff" : "#676792")};
     font-size: 16px;
     font-weight: 500;
     transition: all ease-in-out 0.1s;
@@ -19,14 +18,14 @@ const StyledButton = styled.button<{ $variant: ButtonVaraintType }>`
 
     &:hover {
         background-color: ${({ $variant }) =>
-            $variant === "outlined" ? "#008a6c" : "#ffffff"};
+            $variant === "filled" ? "#ffffff" : "#676792"};
         color: ${({ $variant }) =>
-            $variant === "filled" ? "#008a6c" : "#ffffff"};
+            $variant === "filled" ? "#676792" : "#ffffff"};
     }
 `;
 
 interface ButtonProps {
-    label: string;
+    label: string | number;
     disabled?: boolean;
     variant?: ButtonVaraintType;
 }
