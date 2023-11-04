@@ -1,50 +1,40 @@
 import React from "react";
-import styled from "styled-components";
 import Button from "./Button";
-import KeyContainer from "./KeyContainer";
 import ResultContainer from "./ResultContainer";
 import { DISPLAY_KEYS } from "../constants";
-
-const StyledCalcutator = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    gap: 16px;
-    background-color: #1c1c29;
-    color: #ffffff;
-`;
-
-const StyledContainer = styled.div`
-    width: 300px;
-    height: 500px;
-    border: 1px solid #676792;
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-`;
+import { StyledCalcutator, StyledContainer, StyledKeysWrap } from "../styles";
 
 const Calculator = () => {
+    const handleOnClick = (value: string | number) => () => {
+        console.log(value);
+    };
+
     return (
         <StyledCalcutator>
             <h3>Basic Calculator</h3>
             <StyledContainer>
                 <ResultContainer />
-                <KeyContainer>
-                    {DISPLAY_KEYS.map((displayRow) => {
-                        return displayRow.map((displayKey, idx) => (
+                <StyledKeysWrap>
+                    {DISPLAY_KEYS.map(
+                        (
+                            {
+                                label,
+                                value,
+                                buttonVariant = "solid",
+                                buttonColor = "primary",
+                            },
+                            idx
+                        ) => (
                             <Button
-                                label={displayKey}
+                                label={label}
                                 key={idx}
-                                variant="filled"
+                                variant={buttonVariant}
+                                color={buttonColor}
+                                onClick={handleOnClick(value)}
                             />
-                        ));
-                    })}
-                </KeyContainer>
+                        )
+                    )}
+                </StyledKeysWrap>
             </StyledContainer>
         </StyledCalcutator>
     );

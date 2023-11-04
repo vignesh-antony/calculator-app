@@ -1,42 +1,70 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS, ColorType } from "../constants";
 
-type ButtonVaraintType = "filled" | "outlined";
+export type ButtonVariantType = "solid" | "outline" | "ghost" | "text";
 
-const StyledButton = styled.button<{ $variant: ButtonVaraintType }>`
+const StyledButton = styled.button<{
+    $variant: ButtonVariantType;
+    $color: ColorType;
+}>`
     padding: 8px 16px;
-    background-color: ${({ $variant }) =>
-        $variant === "filled" ? "#676792" : "#ffffff"};
-    border: 1px solid #676792;
+    border: 1px solid transparent;
     border-radius: 8px;
     cursor: pointer;
-    color: ${({ $variant }) => ($variant === "filled" ? "#ffffff" : "#676792")};
     font-size: 16px;
     font-weight: 500;
     transition: all ease-in-out 0.1s;
     user-select: none;
+    outline: none;
 
-    &:hover {
-        background-color: ${({ $variant }) =>
-            $variant === "filled" ? "#ffffff" : "#676792"};
-        color: ${({ $variant }) =>
-            $variant === "filled" ? "#676792" : "#ffffff"};
-    }
+    ${({ $variant, $color }) =>
+        $variant === "solid" &&
+        `
+        background-color: ${COLORS[$color]?.[500]};
+        color: #ffffff;
+
+        &:hover, &:focus {
+            background-color: ${COLORS[$color]?.[900]};
+            box-shadow: inset 0 0 0 2px ${COLORS[$color]?.[500]};
+        }
+    `}
+
+    ${({ $variant, $color }) =>
+        $variant === "outline" &&
+        `
+        background-color: #ffffff;
+        color: ${COLORS[$color]?.[500]};
+        border-color: ${COLORS[$color]?.[500]};
+
+        &:hover, &:focus {
+            background-color:  ${COLORS[$color]?.[100]};
+        }
+    `}
 `;
 
 interface ButtonProps {
     label: string | number;
     disabled?: boolean;
-    variant?: ButtonVaraintType;
+    variant?: ButtonVariantType;
+    color?: ColorType;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<ButtonProps> = ({
     label = "Button Label",
-    variant = "filled",
+    variant = "solid",
+    color = "primary",
     disabled = false,
+    onClick = () => null,
 }) => {
     return (
-        <StyledButton $variant={variant} disabled={disabled}>
+        <StyledButton
+            $variant={variant}
+            $color={color}
+            disabled={disabled}
+            onClick={onClick}
+        >
             {label}
         </StyledButton>
     );
