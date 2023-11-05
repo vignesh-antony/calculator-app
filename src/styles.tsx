@@ -27,3 +27,14 @@ export const StyledKeysWrap = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 12px;
 `;
+
+export const StyledResultContainer = styled.div`
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #474786;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+`;

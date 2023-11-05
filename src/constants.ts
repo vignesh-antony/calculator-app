@@ -59,7 +59,7 @@ export enum OPERATORS {
     SUBTRACT = "-",
     MULTIPLY = "*",
     DIVIDE = "/",
-    POWER = "^",
+    EXPONENT = "^",
     MODULUS = "%",
     EQUALS = "=",
     NEGATE = "+-",
@@ -73,15 +73,18 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
     },
     {
         label: "^",
-        value: OPERATORS.POWER,
+        value: OPERATORS.EXPONENT,
+        buttonColor: "special",
     },
     {
         label: "%",
         value: OPERATORS.MODULUS,
+        buttonColor: "special",
     },
     {
         label: "/",
         value: OPERATORS.DIVIDE,
+        buttonColor: "special",
     },
     {
         label: "7",
@@ -98,6 +101,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
         label: "*",
         value: OPERATORS.MULTIPLY,
+        buttonColor: "special",
     },
     {
         label: "4",
@@ -114,6 +118,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
         label: "-",
         value: OPERATORS.SUBTRACT,
+        buttonColor: "special",
     },
     {
         label: "1",
@@ -130,6 +135,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
         label: "+",
         value: OPERATORS.ADD,
+        buttonColor: "special",
     },
     {
         label: "0",

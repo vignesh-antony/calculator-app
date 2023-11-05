@@ -1,22 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useMemo } from "react";
+import { StyledResultContainer } from "../styles";
 
-const StyledResultContainer = styled.div`
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #474786;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-`;
+interface ResultContainerProps {
+    currentValue?: string | number;
+    pressedKeys?: (string | number)[];
+}
 
-const ResultContainer = () => {
+const ResultContainer: React.FC<ResultContainerProps> = ({
+    pressedKeys = [],
+    currentValue,
+}) => {
+    const expression = useMemo(
+        () => pressedKeys.join(" ") || "0",
+        [pressedKeys]
+    );
     return (
         <StyledResultContainer>
-            <div>15 * 2</div>
-            <h1>30</h1>
+            <div>{expression}</div>
+            <h1>{currentValue}</h1>
         </StyledResultContainer>
     );
 };
