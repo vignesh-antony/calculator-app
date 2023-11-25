@@ -155,3 +155,10 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         buttonColor: "error",
     },
 ];
+
+export const HIGH_PRIORITY_OPERATORS = [
+    OPERATORS.EXPONENT,
+    OPERATORS.MODULUS,
+    OPERATORS.MULTIPLY,
+    OPERATORS.DIVIDE,
+];
