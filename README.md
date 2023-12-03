@@ -4,7 +4,7 @@ Calculator application built in React
 
 ### Requirements
 
--   Add functionality support based on expression tree
+-   Check cases for previously evaluated result and newly entered number
 -   Add Clear button functionality
 -   Provide support for key presses and backspaces
 

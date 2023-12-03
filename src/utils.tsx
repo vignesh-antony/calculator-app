@@ -1,7 +1,15 @@
-import { OPERATORS } from "./constants";
+import {
+    HIGH_PRIORITY_OPERATORS,
+    ValueType,
+    OPERATORS,
+    CALC_ADDONS,
+} from "./constants";
 
-export const isOperator = (value: string | number) =>
+export const isOperator = (value: ValueType) =>
     Object.values(OPERATORS).includes(value as OPERATORS);
+
+export const isHighPriorityOperator = (value: OPERATORS) =>
+    HIGH_PRIORITY_OPERATORS.includes(value);
 
 export const performOperation = (
     firstOperand: number,
@@ -39,11 +47,41 @@ export const performOperation = (
     }
 };
 
-export const evaluateExpression = (pressedKeys: (string | number)[] = []) => {
-    const [numbers, operators] = [[], []];
-    pressedKeys.forEach((key) => {
+export const evaluateExpression = (
+    pressedKeys: ValueType[] = []
+): ValueType => {
+    const numbers: number[] = [];
+    const operators: OPERATORS[] = [];
+
+    const handleOperation = () => {
+        const operator = operators.pop();
+        const secondNumber = numbers.pop() || 0;
+        const firstNumber = numbers.pop() || 0;
+        const result = performOperation(
+            firstNumber,
+            secondNumber,
+            operator as OPERATORS
+        );
+        if (result !== null && result !== undefined) numbers.push(result);
+    };
+
+    for (const key of pressedKeys) {
         if (isOperator(key)) {
-            // TODO: continue the logic
+            while (
+                operators.length &&
+                isHighPriorityOperator(operators[operators.length - 1])
+            ) {
+                handleOperation();
+            }
+            operators.push(key as OPERATORS);
+        } else {
+            numbers.push(Number(key));
         }
-    });
+    }
+
+    while (operators.length) {
+        handleOperation();
+    }
+
+    return numbers[0] ?? CALC_ADDONS.EMPTY;
 };

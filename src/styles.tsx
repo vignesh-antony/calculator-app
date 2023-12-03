@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledCalcutator = styled.div`
+export const StyledCalculator = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;

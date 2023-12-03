@@ -12,13 +12,6 @@ export type ColorType =
 
 export type ColorShade = "100" | "500" | "900";
 
-interface DisplayKeyType {
-    label: string;
-    value: string | number;
-    buttonVariant?: ButtonVariantType;
-    buttonColor?: ColorType;
-}
-
 export const COLORS: {
     [K in ColorType]?: { [C in ColorShade]?: CSSProperties["color"] };
 } = {
@@ -65,10 +58,25 @@ export enum OPERATORS {
     NEGATE = "+-",
 }
 
+export enum CALC_ADDONS {
+    CLEAR = "C",
+    DECIMAL = ".",
+    EMPTY = "",
+}
+
+export type ValueType = number | OPERATORS | CALC_ADDONS;
+
+interface DisplayKeyType {
+    label: string;
+    value: ValueType;
+    buttonVariant?: ButtonVariantType;
+    buttonColor?: ColorType;
+}
+
 export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
         label: "C",
-        value: "C",
+        value: CALC_ADDONS.CLEAR,
         buttonColor: "warning",
     },
     {
@@ -143,7 +151,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
     },
     {
         label: ".",
-        value: ".",
+        value: CALC_ADDONS.DECIMAL,
     },
     {
         label: "+/-",

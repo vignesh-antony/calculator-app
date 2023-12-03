@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import ResultContainer from "./ResultContainer";
-import { DISPLAY_KEYS } from "../constants";
-import { StyledCalcutator, StyledContainer, StyledKeysWrap } from "../styles";
-import { isOperator } from "../utils";
+import { CALC_ADDONS, DISPLAY_KEYS, OPERATORS, ValueType } from "../constants";
+import { StyledCalculator, StyledContainer, StyledKeysWrap } from "../styles";
+import { evaluateExpression, isOperator } from "../utils";
 
 const Calculator = () => {
     const [currentValue, setCurrentValue] = useState<string | number>(0);
-    const [pressedKeys, setPressedKeys] = useState<(string | number)[]>([]);
+    const [pressedKeys, setPressedKeys] = useState<ValueType[]>([]);
 
-    const handleOnClick = (value: string | number) => () => {
-        const lastPressedKey = pressedKeys.at(-1) || "";
+    const handleOnClick = (value: ValueType) => () => {
+        const lastPressedKey = pressedKeys.at(-1) || CALC_ADDONS.EMPTY;
         const isLastOperator = isOperator(lastPressedKey);
 
         if (isOperator(value)) {
-            setPressedKeys((prev) => {
-                const prevKeys = isLastOperator ? prev.slice(0, -1) : prev;
-                return [...prevKeys, value];
-            });
+            if (value === OPERATORS.EQUALS) {
+                const result = evaluateExpression(pressedKeys) || 0;
+                setCurrentValue(result);
+                setPressedKeys([result]);
+            } else {
+                setPressedKeys((prev) => {
+                    const prevKeys = isLastOperator ? prev.slice(0, -1) : prev;
+                    return [...prevKeys, value];
+                });
+            }
         } else {
-            setCurrentValue((prev) => Number(`${prev}${value}`));
+            // TODO: Check cases for previously evaluated result and newly entered number
+            setCurrentValue((prev) =>
+                isLastOperator ? Number(value) : Number(`${prev}${value}`)
+            );
             setPressedKeys((prev) => {
                 const prevKeys = isLastOperator ? prev : prev.slice(0, -1);
                 return [
@@ -33,7 +42,7 @@ const Calculator = () => {
     };
 
     return (
-        <StyledCalcutator>
+        <StyledCalculator>
             <h3>Basic Calculator</h3>
             <StyledContainer>
                 <ResultContainer
@@ -62,7 +71,7 @@ const Calculator = () => {
                     )}
                 </StyledKeysWrap>
             </StyledContainer>
-        </StyledCalcutator>
+        </StyledCalculator>
     );
 };
 
