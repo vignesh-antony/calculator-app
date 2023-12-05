@@ -59,10 +59,16 @@ export enum OPERATORS {
 }
 
 export enum CALC_ADDONS {
-    CLEAR = "C",
+    CLEAR = "Escape",
     DECIMAL = ".",
     EMPTY = "",
+    BACKSPACE = "Backspace",
+    ENTER = "Enter",
 }
+
+export const OPERATOR_ADDON_MAP: { [K in CALC_ADDONS]?: OPERATORS } = {
+    [CALC_ADDONS.ENTER]: OPERATORS.EQUALS,
+};
 
 export type ValueType = number | OPERATORS | CALC_ADDONS;
 

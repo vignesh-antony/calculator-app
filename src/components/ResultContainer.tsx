@@ -17,7 +17,7 @@ const ResultContainer: React.FC<ResultContainerProps> = ({
     return (
         <StyledResultContainer>
             <div>{expression}</div>
-            <h1>{currentValue}</h1>
+            <h1>{currentValue || 0}</h1>
         </StyledResultContainer>
     );
 };

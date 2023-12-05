@@ -2,11 +2,11 @@
 
 Calculator application built in React
 
-### Requirements
+### Remaining
 
--   Check cases for previously evaluated result and newly entered number
--   Add Clear button functionality
--   Provide support for key presses and backspaces
+-   Provide support for decimal and negation
+-   Add history functionality
+-   Add keyboard shortcut description
 
 #### Author
 

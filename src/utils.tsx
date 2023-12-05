@@ -8,6 +8,9 @@ import {
 export const isOperator = (value: ValueType) =>
     Object.values(OPERATORS).includes(value as OPERATORS);
 
+export const isCalcAddons = (value: ValueType) =>
+    Object.values(CALC_ADDONS).includes(value as CALC_ADDONS);
+
 export const isHighPriorityOperator = (value: OPERATORS) =>
     HIGH_PRIORITY_OPERATORS.includes(value);
 
@@ -34,7 +37,7 @@ export const performOperation = (
                 return firstOperand % secondOperand;
             }
             case OPERATORS.EXPONENT: {
-                return firstOperand ^ secondOperand;
+                return Math.pow(firstOperand, secondOperand);
             }
             default: {
                 return 0;
