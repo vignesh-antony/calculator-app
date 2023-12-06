@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
     CALC_ADDONS,
+    HistoryType,
     OPERATORS,
     OPERATOR_ADDON_MAP,
     ValueType,
@@ -10,6 +11,18 @@ import { evaluateExpression, isCalcAddons, isOperator } from "../utils";
 const useCalculator = () => {
     const [currentValue, setCurrentValue] = useState<string | number>(0);
     const [pressedKeys, setPressedKeys] = useState<ValueType[]>([]);
+    const [history, setHistory] = useState<HistoryType[]>([]);
+
+    const saveToHistory = (result: ValueType, keysPressed: ValueType[]) => {
+        setHistory((prev) => [
+            {
+                createdAt: Date.now(),
+                result,
+                evaluatedExpr: keysPressed,
+            },
+            ...prev,
+        ]);
+    };
 
     const handleKeyClick = useCallback(
         (value: ValueType) => {
@@ -20,10 +33,15 @@ const useCalculator = () => {
                 const keysPressed = isLastOperator
                     ? pressedKeys.slice(0, -1)
                     : pressedKeys;
+
+                if (keysPressed.length <= 1) return;
+
                 const result = evaluateExpression(keysPressed) || 0;
 
                 setCurrentValue(result);
                 setPressedKeys([result, value]);
+
+                saveToHistory(result, keysPressed);
             };
 
             const handleClear = () => {
@@ -47,9 +65,9 @@ const useCalculator = () => {
             };
 
             if (isOperator(value) || isCalcAddons(value)) {
+                if (!lastPressedKey) return;
                 switch (value) {
                     case OPERATORS.EQUALS: {
-                        if (!lastPressedKey) break;
                         handleEquals();
                         break;
                     }
@@ -71,6 +89,8 @@ const useCalculator = () => {
                     }
                 }
             } else {
+                if (`${lastPressedKey}`.length === 15) return;
+
                 setCurrentValue((prev) =>
                     isLastOperator ? Number(value) : Number(`${prev}${value}`)
                 );
@@ -120,6 +140,7 @@ const useCalculator = () => {
     return {
         currentValue,
         pressedKeys,
+        history,
         handleKeyClick,
     };
 };

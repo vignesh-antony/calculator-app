@@ -5,8 +5,8 @@ Calculator application built in React
 ### Remaining
 
 -   Provide support for decimal and negation
--   Add history functionality
--   Add keyboard shortcut description
+-   Add mobile support as well
+-   Add calculator working information in info panel
 
 #### Author
 

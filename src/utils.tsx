@@ -14,6 +14,13 @@ export const isCalcAddons = (value: ValueType) =>
 export const isHighPriorityOperator = (value: OPERATORS) =>
     HIGH_PRIORITY_OPERATORS.includes(value);
 
+export const getPressedKeyType = (value: ValueType) => {
+    return {
+        isEqualsKey: value === OPERATORS.EQUALS,
+        isClearKey: value === CALC_ADDONS.CLEAR,
+    };
+};
+
 export const performOperation = (
     firstOperand: number,
     secondOperand: number,
@@ -86,5 +93,5 @@ export const evaluateExpression = (
         handleOperation();
     }
 
-    return numbers[0] ?? CALC_ADDONS.EMPTY;
+    return Number(numbers[0].toFixed(10)) ?? CALC_ADDONS.EMPTY;
 };

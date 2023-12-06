@@ -10,7 +10,7 @@ export type ColorType =
     | "success"
     | "special";
 
-export type ColorShade = "100" | "500" | "900";
+export type ColorShade = "100" | "500" | "700" | "900";
 
 export const COLORS: {
     [K in ColorType]?: { [C in ColorShade]?: CSSProperties["color"] };
@@ -18,6 +18,7 @@ export const COLORS: {
     primary: {
         "100": "#e8e8ff",
         "500": "#676792",
+        "700": "#373752",
         "900": "#1c1c29",
     },
     secondary: {
@@ -71,6 +72,12 @@ export const OPERATOR_ADDON_MAP: { [K in CALC_ADDONS]?: OPERATORS } = {
 };
 
 export type ValueType = number | OPERATORS | CALC_ADDONS;
+
+export type HistoryType = {
+    createdAt: number;
+    evaluatedExpr: ValueType[];
+    result: ValueType;
+};
 
 interface DisplayKeyType {
     label: string;
