@@ -1,32 +1,57 @@
-# Calculator Application - React
+# React Calculator App
 
-Calculator application built in React. Enjoy calculating with simplicity and ease!
+A simple and intuitive calculator application built with React. Enjoy effortless calculations with a dynamic user interface
 
-### Math Operations
+## Local setup
 
-1. **Addition (`+`):** Perform addition operations.
-2. **Subtraction (`-`):** Subtract one value from another.
-3. **Multiplication (`*`):** Multiply two numbers.
-4. **Division (`/`):** Divide one number by another.
-5. **Exponentiation (`^`):** Raise a number to the power of another.
-6. **Modulus (`%`):** Get the remainder of a division operation.
-7. **Negation (`±`):** Negate the sign of a number.
+Just enter the below commands in your terminal and voila!
 
-### Additional Features
+```sh
+# for installing the dependencies
+yarn install
 
--   **History Support:** View a record of previous calculations.
--   **Keyboard Mapping:** Use your keyboard for inputs and computations.
+# for starting the server
+yarn start
+```
 
-### Usage Tips
+## Previews
 
--   Enter numbers and operations using the provided buttons.
--   Use the `C` button or `Esc` key to reset the calculator.
--   Use the `=` button or `Enter` key to compute the result of the current expression.
--   Use the `Backspace` key to edit the latest entered input.
--   History can be scrolled through to revisit previous calculations.
+Responsive for web, tablet and mobile devices!
 
+![Calculator application preview](https://github.com/vignesh-antony/calculator-app/blob/master/public/calculator-app-ss.png)
+
+## Math Operations
+
+| Operator | Operation      | Description                             |
+| -------- | -------------- | --------------------------------------- |
+| `+`      | Addition       | Perform addition operations.            |
+| `-`      | Subtraction    | Subtract one value from another.        |
+| `*`      | Multiplication | Multiply two numbers.                   |
+| `/`      | Division       | Divide one number by another.           |
+| `^`      | Exponentiation | Raise a number to the power of another. |
+| `±`      | Negation       | Negate the sign of a number.            |
+
+## Additional Features
+
+-   **History Support:** Easily review previous calculations.
+-   **Keyboard Mapping:** Efficiently input and compute using your keyboard.
+
+## Usage Tips
+
+-   Enter numbers and operations with the provided buttons or your keyboard.
+-   Use the `C` button or `Esc` key to reset the calculator for a fresh start.
+-   Press the `=` button or `Enter` key to swiftly compute the result.
+-   Utilize the `Backspace` key to edit the latest entered input conveniently.
+-   Scroll through the history to revisit and learn from previous calculations.
+
+> [!NOTE]
 > This calculator is designed for basic arithmetic operations and may not support complex mathematical functions.
 
-#### Author
+### License
 
-[Vignesh Antonyraj](https://github.com/vignesh-antony)
+This calculator application is open-source and available under the [MIT License](LICENSE).
+Feel free to fork, modify, and share as per the terms of the license.
+
+### Author
+
+Developed and maintained by [Vignesh Antonyraj](https://github.com/vignesh-antony). Feel free to contribute!
