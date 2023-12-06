@@ -18,7 +18,7 @@ export const COLORS: {
     primary: {
         "100": "#e8e8ff",
         "500": "#676792",
-        "700": "#373752",
+        "700": "#2e2e44",
         "900": "#1c1c29",
     },
     secondary: {
@@ -167,7 +167,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         value: CALC_ADDONS.DECIMAL,
     },
     {
-        label: "+/-",
+        label: "±",
         value: OPERATORS.NEGATE,
     },
     {

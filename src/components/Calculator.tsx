@@ -21,8 +21,7 @@ const Calculator = () => {
     return (
         <StyledWrapper>
             <InfoPanel />
-            <StyledCalculator>
-                <h3>Basic Calculator</h3>
+            <StyledCalculator className="scroll-container">
                 <StyledContainer>
                     <ResultContainer
                         pressedKeys={pressedKeys}
