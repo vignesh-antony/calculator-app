@@ -1,9 +1,10 @@
 import {
     HIGH_PRIORITY_OPERATORS,
-    ValueType,
     OPERATORS,
     CALC_ADDONS,
+    NEGATE_CONSTANT,
 } from "./constants";
+import { ValueType } from "./types";
 
 export const isOperator = (value: ValueType) =>
     Object.values(OPERATORS).includes(value as OPERATORS);
@@ -45,6 +46,9 @@ export const performOperation = (
             }
             case OPERATORS.EXPONENT: {
                 return Math.pow(firstOperand, secondOperand);
+            }
+            case OPERATORS.NEGATE: {
+                return firstOperand * NEGATE_CONSTANT;
             }
             default: {
                 return 0;
@@ -93,5 +97,5 @@ export const evaluateExpression = (
         handleOperation();
     }
 
-    return Number(numbers[0].toFixed(10)) ?? CALC_ADDONS.EMPTY;
+    return Number(numbers[0].toFixed(10)) ?? 0;
 };

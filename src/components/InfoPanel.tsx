@@ -60,7 +60,7 @@ const InfoPanel = () => {
                         <tr>
                             <td className="info-symbol">C</td>
                             <td>Clear</td>
-                            <td>Clears the current input and result.</td>
+                            <td>Resets the current input and result.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -68,9 +68,9 @@ const InfoPanel = () => {
                 <h4>Keyboard Mapping</h4>
                 <p className="info-para">
                     You can utilize your keyboard for entering values, with the
-                    Enter key triggering computations. To clear inputs, press
-                    the Escape key, and for editing the latest input, use the
-                    Backspace key.
+                    Enter key triggering computations. To reset the calculator,
+                    press the Escape key, and for editing the latest input, use
+                    the Backspace key.
                 </p>
             </main>
         </StyledInfoPanel>

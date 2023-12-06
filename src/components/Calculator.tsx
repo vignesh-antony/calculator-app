@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import ResultContainer from "./ResultContainer";
-import { DISPLAY_KEYS, ValueType } from "../constants";
+import { DISPLAY_KEYS } from "../constants";
 import {
     StyledCalculator,
     StyledWrapper,
@@ -11,6 +11,7 @@ import {
 import useCalculator from "../hooks/useCalculator";
 import HistoryBar from "./HistoryBar";
 import InfoPanel from "./InfoPanel";
+import { ValueType } from "../types";
 
 const Calculator = () => {
     const { currentValue, pressedKeys, history, handleKeyClick } =
@@ -23,6 +24,7 @@ const Calculator = () => {
             <InfoPanel />
             <StyledCalculator className="scroll-container">
                 <StyledContainer>
+                    <h4>CALCULATOR</h4>
                     <ResultContainer
                         pressedKeys={pressedKeys}
                         currentValue={currentValue}

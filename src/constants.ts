@@ -1,16 +1,5 @@
 import { CSSProperties } from "styled-components";
-import { ButtonVariantType } from "./components/Button";
-
-export type ColorType =
-    | "primary"
-    | "secondary"
-    | "tertiary"
-    | "warning"
-    | "error"
-    | "success"
-    | "special";
-
-export type ColorShade = "100" | "500" | "700" | "900";
+import { ColorShade, ColorType, DisplayKeyType } from "./types";
 
 export const COLORS: {
     [K in ColorType]?: { [C in ColorShade]?: CSSProperties["color"] };
@@ -56,7 +45,7 @@ export enum OPERATORS {
     EXPONENT = "^",
     MODULUS = "%",
     EQUALS = "=",
-    NEGATE = "+-",
+    NEGATE = "±",
 }
 
 export enum CALC_ADDONS {
@@ -70,21 +59,6 @@ export enum CALC_ADDONS {
 export const OPERATOR_ADDON_MAP: { [K in CALC_ADDONS]?: OPERATORS } = {
     [CALC_ADDONS.ENTER]: OPERATORS.EQUALS,
 };
-
-export type ValueType = number | OPERATORS | CALC_ADDONS;
-
-export type HistoryType = {
-    createdAt: number;
-    evaluatedExpr: ValueType[];
-    result: ValueType;
-};
-
-interface DisplayKeyType {
-    label: string;
-    value: ValueType;
-    buttonVariant?: ButtonVariantType;
-    buttonColor?: ColorType;
-}
 
 export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
@@ -183,3 +157,5 @@ export const HIGH_PRIORITY_OPERATORS = [
     OPERATORS.MULTIPLY,
     OPERATORS.DIVIDE,
 ];
+export const NEGATE_CONSTANT = -1;
+export const MAX_NUM_INPUT_DIGITS = 15;

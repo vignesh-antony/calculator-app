@@ -142,6 +142,7 @@ export const StyledHistoryContainer = styled.div`
         flex: 1 100%;
         border-left: none;
         border-top: 1px solid ${COLORS.primary?.[500]};
+        max-height: 600px;
     }
 `;
 

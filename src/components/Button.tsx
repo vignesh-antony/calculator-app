@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { COLORS, ColorType } from "../constants";
+import { COLORS } from "../constants";
+import { ColorType } from "../types";
 
 export type ButtonVariantType = "solid" | "outline" | "ghost" | "text";
 

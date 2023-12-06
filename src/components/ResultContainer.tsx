@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { StyledResultContainer } from "../styles";
-import { HistoryType, ValueType } from "../constants";
+import { HistoryType, ValueType } from "../types";
 import { getPressedKeyType } from "../utils";
 
 interface ResultContainerProps {

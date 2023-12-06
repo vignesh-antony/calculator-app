@@ -20,7 +20,7 @@ Calculator application built in React. Enjoy calculating with simplicity and eas
 ### Usage Tips
 
 -   Enter numbers and operations using the provided buttons.
--   Use the `C` button or `Esc` key to clear the current input.
+-   Use the `C` button or `Esc` key to reset the calculator.
 -   Use the `=` button or `Enter` key to compute the result of the current expression.
 -   Use the `Backspace` key to edit the latest entered input.
 -   History can be scrolled through to revisit previous calculations.

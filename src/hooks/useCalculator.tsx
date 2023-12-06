@@ -1,15 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 import {
-    CALC_ADDONS,
-    HistoryType,
     OPERATORS,
+    CALC_ADDONS,
     OPERATOR_ADDON_MAP,
-    ValueType,
+    MAX_NUM_INPUT_DIGITS,
 } from "../constants";
-import { evaluateExpression, isCalcAddons, isOperator } from "../utils";
+import {
+    isOperator,
+    isCalcAddons,
+    performOperation,
+    evaluateExpression,
+} from "../utils";
+import { HistoryType, ValueType } from "../types";
 
 const useCalculator = () => {
-    const [currentValue, setCurrentValue] = useState<string | number>(0);
+    const [currentValue, setCurrentValue] = useState<string | number>(
+        CALC_ADDONS.EMPTY
+    );
     const [pressedKeys, setPressedKeys] = useState<ValueType[]>([]);
     const [history, setHistory] = useState<HistoryType[]>([]);
 
@@ -26,8 +33,11 @@ const useCalculator = () => {
 
     const handleKeyClick = useCallback(
         (value: ValueType) => {
-            const lastPressedKey = pressedKeys.at(-1) ?? CALC_ADDONS.EMPTY;
+            const lastPressedKey = pressedKeys.at(-1) || CALC_ADDONS.EMPTY;
             const isLastOperator = isOperator(lastPressedKey);
+            const hasDecimalPoint = `${lastPressedKey}`.includes(
+                CALC_ADDONS.DECIMAL
+            );
 
             const handleEquals = () => {
                 const keysPressed = isLastOperator
@@ -45,22 +55,50 @@ const useCalculator = () => {
             };
 
             const handleClear = () => {
-                setCurrentValue(0);
+                setCurrentValue(CALC_ADDONS.EMPTY);
                 setPressedKeys([]);
             };
 
             const handleBackspace = () => {
-                const prefixNumber = Number(`${lastPressedKey}`.slice(0, -1));
+                const prefixString = `${lastPressedKey}`.slice(0, -1);
+
                 setCurrentValue(
-                    (isLastOperator ? pressedKeys.at(-2) : prefixNumber) ||
+                    (isLastOperator ? pressedKeys.at(-2) : prefixString) ||
                         pressedKeys.at(-3) ||
-                        0
+                        CALC_ADDONS.EMPTY
                 );
                 setPressedKeys((prev) => {
                     const remainingKeys = prev.slice(0, -1);
-                    return isLastOperator || !prefixNumber
+                    return isLastOperator || !prefixString
                         ? remainingKeys
-                        : [...remainingKeys, prefixNumber];
+                        : [...remainingKeys, prefixString];
+                });
+            };
+
+            const handleNegation = () => {
+                if (isLastOperator) return;
+                const negatedValue =
+                    performOperation(
+                        Number(lastPressedKey),
+                        NaN,
+                        OPERATORS.NEGATE
+                    ) ?? 0;
+
+                setCurrentValue(negatedValue);
+                setPressedKeys((prev) => {
+                    const prevKeys = prev.slice(0, -1);
+                    return [...prevKeys, negatedValue];
+                });
+            };
+
+            const handleDecimal = () => {
+                if (isLastOperator || hasDecimalPoint) return;
+                const decimalValue = `${lastPressedKey}${value}` as ValueType;
+
+                setCurrentValue(decimalValue);
+                setPressedKeys((prev) => {
+                    const prevKeys = prev.slice(0, -1);
+                    return [...prevKeys, decimalValue];
                 });
             };
 
@@ -79,29 +117,45 @@ const useCalculator = () => {
                         handleBackspace();
                         break;
                     }
+                    case OPERATORS.NEGATE: {
+                        handleNegation();
+                        break;
+                    }
+                    case CALC_ADDONS.DECIMAL: {
+                        handleDecimal();
+                        break;
+                    }
                     default: {
+                        if (!isLastOperator && hasDecimalPoint)
+                            setCurrentValue(Number(lastPressedKey));
                         setPressedKeys((prev) => {
-                            const prevKeys = isLastOperator
-                                ? prev.slice(0, -1)
-                                : prev;
-                            return [...prevKeys, value];
+                            const prevKeys =
+                                isLastOperator || hasDecimalPoint
+                                    ? prev.slice(0, -1)
+                                    : prev;
+                            const keysPressed = hasDecimalPoint
+                                ? [...prevKeys, Number(lastPressedKey)]
+                                : prevKeys;
+                            return [...keysPressed, value];
                         });
                     }
                 }
             } else {
-                if (`${lastPressedKey}`.length === 15) return;
-
+                if (
+                    !(lastPressedKey || Number(value)) ||
+                    `${lastPressedKey}`.length === MAX_NUM_INPUT_DIGITS
+                )
+                    return;
+                console.log({ lastPressedKey, value });
                 setCurrentValue((prev) =>
-                    isLastOperator ? Number(value) : Number(`${prev}${value}`)
+                    isLastOperator ? value : `${prev}${value}`
                 );
                 setPressedKeys((prev) => {
                     if (lastPressedKey === OPERATORS.EQUALS) return [value];
                     const prevKeys = isLastOperator ? prev : prev.slice(0, -1);
                     return [
                         ...prevKeys,
-                        isLastOperator
-                            ? value
-                            : Number(`${lastPressedKey}${value}`),
+                        isLastOperator ? value : `${lastPressedKey}${value}`,
                     ];
                 });
             }

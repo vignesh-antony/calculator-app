@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { StyledHistoryContainer, StyledHistoryWrap } from "../styles";
-import { HistoryType } from "../constants";
+import { HistoryType } from "../types";
 
 interface HistoryBarProps {
     history: HistoryType[];
