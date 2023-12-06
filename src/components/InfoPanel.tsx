@@ -48,19 +48,19 @@ const InfoPanel = () => {
                             <td>Raise a number to the power of another.</td>
                         </tr>
                         <tr>
-                            <td className="info-symbol">%</td>
-                            <td>Modulus</td>
-                            <td>Get the remainder of a division operation.</td>
-                        </tr>
-                        <tr>
                             <td className="info-symbol">±</td>
                             <td>Negation</td>
                             <td>Negate the sign of a number.</td>
                         </tr>
                         <tr>
                             <td className="info-symbol">C</td>
-                            <td>Clear</td>
-                            <td>Resets the current input and result.</td>
+                            <td>Backspace</td>
+                            <td>Edits the latest input.</td>
+                        </tr>
+                        <tr>
+                            <td className="info-symbol">AC</td>
+                            <td>All Clear</td>
+                            <td>Resets the calculator.</td>
                         </tr>
                     </tbody>
                 </table>

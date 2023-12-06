@@ -11,15 +11,16 @@ export const StyledWrapper = styled.div`
     color: #ffffff;
 
     @media (max-width: 1200px) {
-        display: flex;
-        flex-wrap: wrap;
-        height: auto;
-        gap: unset;
+        grid-template-columns: 400px 1fr;
+        grid-template-rows: auto 500px;
+        height: unset;
+        min-height: 100vh;
+        row-gap: unset;
     }
 
     @media (max-width: 800px) {
-        gap: 16px;
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
     }
 
     .scroll-container {
@@ -48,14 +49,6 @@ export const StyledCalculator = styled.div`
     align-items: center;
     gap: 16px;
     min-height: 500px;
-
-    @media (max-width: 1300px) {
-        flex: 1;
-    }
-
-    @media (max-width: 800px) {
-        flex: 1 100%;
-    }
 `;
 
 export const StyledContainer = styled.div`
@@ -123,9 +116,11 @@ export const StyledHistoryContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 16px 0;
+        padding: 16px;
         align-self: center;
         border-top: 1px solid ${COLORS.primary?.[500]};
+        text-align: center;
+        font-size: 14px;
 
         a {
             color: ${COLORS.special?.[100]};
@@ -139,10 +134,14 @@ export const StyledHistoryContainer = styled.div`
     }
 
     @media (max-width: 1200px) {
-        flex: 1 100%;
+        grid-column: span 2;
         border-left: none;
         border-top: 1px solid ${COLORS.primary?.[500]};
-        max-height: 600px;
+        max-height: 500px;
+    }
+
+    @media (max-width: 800px) {
+        grid-column: 1;
     }
 `;
 
@@ -166,7 +165,7 @@ export const StyledHistoryWrap = styled.div`
 `;
 
 export const StyledInfoPanel = styled.div`
-    padding: 16px;
+    padding: 16px 16px 24px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -226,12 +225,7 @@ export const StyledInfoPanel = styled.div`
         }
     }
 
-    @media (max-width: 1200px) {
-        flex: 0 0 400px;
-    }
-
     @media (max-width: 800px) {
-        flex: 1 100%;
         border-right: none;
         border-bottom: 1px solid ${COLORS.primary?.[500]};
     }

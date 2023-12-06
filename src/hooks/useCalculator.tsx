@@ -40,18 +40,22 @@ const useCalculator = () => {
             );
 
             const handleEquals = () => {
-                const keysPressed = isLastOperator
-                    ? pressedKeys.slice(0, -1)
-                    : pressedKeys;
+                const keysPressed =
+                    isLastOperator || hasDecimalPoint
+                        ? pressedKeys.slice(0, -1)
+                        : pressedKeys;
+                const exprKeys = hasDecimalPoint
+                    ? [...keysPressed, Number(lastPressedKey)]
+                    : keysPressed;
 
-                if (keysPressed.length <= 1) return;
+                if (exprKeys.length <= 1) return;
 
-                const result = evaluateExpression(keysPressed) || 0;
+                const result = evaluateExpression(exprKeys) || 0;
 
                 setCurrentValue(result);
                 setPressedKeys([result, value]);
 
-                saveToHistory(result, keysPressed);
+                saveToHistory(result, exprKeys);
             };
 
             const handleClear = () => {
@@ -61,17 +65,21 @@ const useCalculator = () => {
 
             const handleBackspace = () => {
                 const prefixString = `${lastPressedKey}`.slice(0, -1);
+                // Handling [-1 -> -] and [-0. -> -0] scenarios when backspacing
+                const truncatedValue = /-(0|$)/.test(prefixString)
+                    ? CALC_ADDONS.EMPTY
+                    : prefixString;
 
                 setCurrentValue(
-                    (isLastOperator ? pressedKeys.at(-2) : prefixString) ||
+                    (isLastOperator ? pressedKeys.at(-2) : truncatedValue) ||
                         pressedKeys.at(-3) ||
                         CALC_ADDONS.EMPTY
                 );
                 setPressedKeys((prev) => {
                     const remainingKeys = prev.slice(0, -1);
-                    return isLastOperator || !prefixString
+                    return isLastOperator || !truncatedValue
                         ? remainingKeys
-                        : [...remainingKeys, prefixString];
+                        : [...remainingKeys, truncatedValue];
                 });
             };
 
@@ -93,7 +101,9 @@ const useCalculator = () => {
 
             const handleDecimal = () => {
                 if (isLastOperator || hasDecimalPoint) return;
-                const decimalValue = `${lastPressedKey}${value}` as ValueType;
+                const decimalValue = `${
+                    lastPressedKey || 0
+                }${value}` as ValueType;
 
                 setCurrentValue(decimalValue);
                 setPressedKeys((prev) => {
@@ -103,7 +113,7 @@ const useCalculator = () => {
             };
 
             if (isOperator(value) || isCalcAddons(value)) {
-                if (!lastPressedKey) return;
+                if (!lastPressedKey && value !== CALC_ADDONS.DECIMAL) return;
                 switch (value) {
                     case OPERATORS.EQUALS: {
                         handleEquals();
@@ -146,7 +156,7 @@ const useCalculator = () => {
                     `${lastPressedKey}`.length === MAX_NUM_INPUT_DIGITS
                 )
                     return;
-                console.log({ lastPressedKey, value });
+
                 setCurrentValue((prev) =>
                     isLastOperator ? value : `${prev}${value}`
                 );

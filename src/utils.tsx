@@ -67,35 +67,68 @@ export const evaluateExpression = (
     const numbers: number[] = [];
     const operators: OPERATORS[] = [];
 
-    const handleOperation = () => {
+    const getHigherOperationParams = () => {
         const operator = operators.pop();
         const secondNumber = numbers.pop() || 0;
         const firstNumber = numbers.pop() || 0;
+        return {
+            firstNumber,
+            secondNumber,
+            operator,
+        };
+    };
+
+    const getLowerOperationParams = () => {
+        const operator = operators.shift();
+        const firstNumber = numbers.shift() || 0;
+        const secondNumber = numbers.shift() || 0;
+        return {
+            operator,
+            firstNumber,
+            secondNumber,
+        };
+    };
+
+    const handleOperation = ({ isHigherOperation = true }) => {
+        const { firstNumber, secondNumber, operator } = isHigherOperation
+            ? getHigherOperationParams()
+            : getLowerOperationParams();
         const result = performOperation(
             firstNumber,
             secondNumber,
             operator as OPERATORS
         );
-        if (result !== null && result !== undefined) numbers.push(result);
+        if (result !== null && result !== undefined)
+            isHigherOperation ? numbers.push(result) : numbers.unshift(result);
+    };
+
+    const performHigherOperations = () => {
+        while (
+            operators.length &&
+            isHighPriorityOperator(operators[operators.length - 1])
+        ) {
+            handleOperation({ isHigherOperation: true });
+        }
+    };
+
+    /** Performs lower order operations from left to right */
+    const performLowerOperations = () => {
+        while (operators.length) {
+            handleOperation({ isHigherOperation: false });
+        }
     };
 
     for (const key of pressedKeys) {
         if (isOperator(key)) {
-            while (
-                operators.length &&
-                isHighPriorityOperator(operators[operators.length - 1])
-            ) {
-                handleOperation();
-            }
+            performHigherOperations();
             operators.push(key as OPERATORS);
         } else {
             numbers.push(Number(key));
         }
     }
 
-    while (operators.length) {
-        handleOperation();
-    }
+    performHigherOperations();
+    performLowerOperations();
 
     return Number(numbers[0].toFixed(10)) ?? 0;
 };

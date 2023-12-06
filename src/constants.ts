@@ -62,18 +62,18 @@ export const OPERATOR_ADDON_MAP: { [K in CALC_ADDONS]?: OPERATORS } = {
 
 export const DISPLAY_KEYS: DisplayKeyType[] = [
     {
-        label: "C",
+        label: "AC",
         value: CALC_ADDONS.CLEAR,
         buttonColor: "warning",
     },
     {
-        label: "^",
-        value: OPERATORS.EXPONENT,
-        buttonColor: "special",
+        label: "C",
+        value: CALC_ADDONS.BACKSPACE,
+        buttonColor: "secondary",
     },
     {
-        label: "%",
-        value: OPERATORS.MODULUS,
+        label: "^",
+        value: OPERATORS.EXPONENT,
         buttonColor: "special",
     },
     {
