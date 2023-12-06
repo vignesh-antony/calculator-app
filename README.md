@@ -1,6 +1,6 @@
 # React Calculator App
 
-A simple and intuitive calculator application built with React. Enjoy effortless calculations with a dynamic user interface
+A simple and intuitive calculator application built with React. Enjoy effortless calculations with a dynamic user interface.
 
 ## Local setup
 
@@ -22,6 +22,8 @@ Responsive for web, tablet and mobile devices!
 
 ## Math Operations
 
+Supports the below mentioned basic arithmetic operations.
+
 | Operator | Operation      | Description                             |
 | -------- | -------------- | --------------------------------------- |
 | `+`      | Addition       | Perform addition operations.            |
@@ -33,10 +35,14 @@ Responsive for web, tablet and mobile devices!
 
 ## Additional Features
 
+Comes along with some additional features to speed up your calcuations!
+
 -   **History Support:** Easily review previous calculations.
 -   **Keyboard Mapping:** Efficiently input and compute using your keyboard.
 
 ## Usage Tips
+
+Have provided some usage tips and shortcuts available in the application.
 
 -   Enter numbers and operations with the provided buttons or your keyboard.
 -   Use the `C` button or `Esc` key to reset the calculator for a fresh start.
@@ -46,6 +52,8 @@ Responsive for web, tablet and mobile devices!
 
 > [!NOTE]
 > This calculator is designed for basic arithmetic operations and may not support complex mathematical functions.
+
+---
 
 ### License
 
