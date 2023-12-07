@@ -9,6 +9,9 @@ const StyledButton = styled.button<{
     $variant: ButtonVariantType;
     $color: ColorType;
 }>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 8px 16px;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -45,7 +48,7 @@ const StyledButton = styled.button<{
 `;
 
 interface ButtonProps {
-    label: string | number;
+    label: string | number | React.ReactElement;
     disabled?: boolean;
     variant?: ButtonVariantType;
     color?: ColorType;

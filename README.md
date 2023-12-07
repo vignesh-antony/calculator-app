@@ -18,7 +18,7 @@ yarn start
 
 Responsive for web, tablet and mobile devices!
 
-![Calculator application preview](https://github.com/vignesh-antony/calculator-app/blob/master/public/calculator-app-ss.png)
+![Calculator application preview](https://github.com/vignesh-antony/calculator-app/raw/master/public/calculator-app-ss.png)
 
 ## Math Operations
 
@@ -45,9 +45,9 @@ Comes along with some additional features to speed up your calcuations!
 Have provided some usage tips and shortcuts available in the application.
 
 -   Enter numbers and operations with the provided buttons or your keyboard.
--   Use the `C` button or `Esc` key to reset the calculator for a fresh start.
+-   Use the `AC` button or `Esc` key to reset the calculator for a fresh start.
 -   Press the `=` button or `Enter` key to swiftly compute the result.
--   Utilize the `Backspace` key to edit the latest entered input conveniently.
+-   Utilize the `C` button or `Backspace` key to edit the latest entered input conveniently.
 -   Scroll through the history to revisit and learn from previous calculations.
 
 > [!NOTE]

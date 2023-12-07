@@ -20,7 +20,7 @@ export type HistoryType = {
 };
 
 export interface DisplayKeyType {
-    label: string;
+    label: string | React.ReactElement;
     value: ValueType;
     buttonVariant?: ButtonVariantType;
     buttonColor?: ColorType;

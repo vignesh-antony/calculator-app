@@ -1,4 +1,5 @@
 import { CSSProperties } from "styled-components";
+import { FaMinus, FaPlus, FaDivide, FaEquals, FaAngleUp } from "react-icons/fa";
 import { ColorShade, ColorType, DisplayKeyType } from "./types";
 
 export const COLORS: {
@@ -72,12 +73,12 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         buttonColor: "secondary",
     },
     {
-        label: "^",
+        label: <FaAngleUp size={14} />,
         value: OPERATORS.EXPONENT,
         buttonColor: "special",
     },
     {
-        label: "/",
+        label: <FaDivide size={14} />,
         value: OPERATORS.DIVIDE,
         buttonColor: "special",
     },
@@ -94,7 +95,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         value: 9,
     },
     {
-        label: "*",
+        label: <FaPlus size={14} style={{ rotate: "45deg" }} />,
         value: OPERATORS.MULTIPLY,
         buttonColor: "special",
     },
@@ -111,7 +112,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         value: 6,
     },
     {
-        label: "-",
+        label: <FaMinus size={14} />,
         value: OPERATORS.SUBTRACT,
         buttonColor: "special",
     },
@@ -128,7 +129,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         value: 3,
     },
     {
-        label: "+",
+        label: <FaPlus size={14} />,
         value: OPERATORS.ADD,
         buttonColor: "special",
     },
@@ -145,7 +146,7 @@ export const DISPLAY_KEYS: DisplayKeyType[] = [
         value: OPERATORS.NEGATE,
     },
     {
-        label: "=",
+        label: <FaEquals size={14} />,
         value: OPERATORS.EQUALS,
         buttonColor: "error",
     },
